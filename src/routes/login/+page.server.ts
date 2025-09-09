@@ -3,8 +3,7 @@ import { getUsers } from "$lib/server/db";
 import crypto from "crypto";
 import { redirect } from "@sveltejs/kit";
 import jwt from "jsonwebtoken";
-
-const SECRET_KEY = "your_secret_key_here"; // Keep it secret, use env in production
+import {  SECRET_KEY } from "$env/static/private"
 
 export const actions: Actions = {
   default: async ({ request, cookies }) => {

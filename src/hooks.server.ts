@@ -2,9 +2,7 @@ import type { Handle } from "@sveltejs/kit";
 import { redirect } from "@sveltejs/kit";
 import { saveWeatherEntry } from "./lib/server/weatherDb";
 import jwt from "jsonwebtoken";
-
-const WEATHER_API_KEY = "b91872c774f877283dc9faf31eed2a15";
-const SECRET_KEY = "your_secret_key_here";
+import { WEATHER_API_KEY, SECRET_KEY } from "$env/static/private"
 
 export const handle: Handle = async ({ event, resolve }) => {
   const token = event.cookies.get("token");
