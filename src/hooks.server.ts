@@ -1,27 +1,41 @@
 import type { Handle } from "@sveltejs/kit";
 import { redirect } from "@sveltejs/kit";
 import { saveWeatherEntry } from "./lib/server/weatherDb";
+import jwt from "jsonwebtoken";
 
 const WEATHER_API_KEY = "b91872c774f877283dc9faf31eed2a15";
+const SECRET_KEY = "your_secret_key_here";
 
 export const handle: Handle = async ({ event, resolve }) => {
   const token = event.cookies.get("token");
-  event.locals.user = token ? { token } : null;
 
-  // protect main "/" route
+  let email: string | null = null;
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, SECRET_KEY) as { email: string };
+      email = decoded.email;
+
+      event.locals.user = { token, email };
+    } catch (e) {
+      console.error("Invalid token");
+      event.locals.user = null;
+    }
+  }
+
+  // Protect main route
   if (!event.locals.user && event.url.pathname === "/") {
     throw redirect(302, "/login");
   }
 
-  if (event.url.pathname === "/" && event.locals.user) {
+  // Fetch weather and save per email
+  if (event.url.pathname === "/" && event.locals.user && email) {
     try {
-      // Get user IP location (fallback to Delhi)
       const ipRes = await fetch("http://ip-api.com/json/");
       const ipData = await ipRes.json();
       const lat = ipData.lat ?? 28.6139;
       const lon = ipData.lon ?? 77.2090;
 
-      // Fetch weather
       const weatherRes = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
       );
@@ -40,9 +54,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 
       event.locals.weather = weatherEntry;
 
-      // Save to file system
-      saveWeatherEntry(weatherEntry);
-
+      // Save per user email
+      saveWeatherEntry(email, weatherEntry);
     } catch (e) {
       console.error("Weather fetch failed:", e);
       event.locals.weather = null;

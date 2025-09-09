@@ -2,6 +2,9 @@ import type { Actions } from "./$types";
 import { getUsers } from "$lib/server/db";
 import crypto from "crypto";
 import { redirect } from "@sveltejs/kit";
+import jwt from "jsonwebtoken";
+
+const SECRET_KEY = "your_secret_key_here"; // Keep it secret, use env in production
 
 export const actions: Actions = {
   default: async ({ request, cookies }) => {
@@ -17,7 +20,8 @@ export const actions: Actions = {
       return { error: "Invalid credentials" };
     }
 
-    const token = crypto.randomBytes(16).toString("hex");
+    // Create a JWT token containing the email
+    const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: "1h" });
 
     cookies.set("token", token, {
       path: "/",
