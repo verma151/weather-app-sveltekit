@@ -9,13 +9,12 @@
 
   function weatherIcon(weather: string, hour: number) {
     if (weather.toLowerCase().includes("rain")) return "🌧️";
-    if (hour >= 18 || hour < 6) return "🌙"; // after 6pm or before 6am
+    if (hour >= 18 || hour < 6) return "🌙"; 
     return "☀️";
   }
 </script>
 
 <div class="container">
-  <!-- Header Card -->
   <div class="header-card">
     <div class="header-content">
       <h1 class="title">My Weather</h1>
@@ -25,9 +24,7 @@
     </div>
   </div>
 
-  <!-- Main Weather Card -->
   <div class="weather-card">
-    <!-- Tab Navigation -->
     <div class="tab-container">
       <button 
         class="tab-button {activeTab === 'current' ? 'active' : ''}"
@@ -45,7 +42,6 @@
       </button>
     </div>
 
-    <!-- Tab Content -->
     <div class="tab-content">
       {#if activeTab === "current"}
         <div class="current-weather">
@@ -121,7 +117,6 @@
     </div>
   </div>
 
-  <!-- Logout Button -->
   <div class="logout-container">
     <form method="POST" action="/logout">
       <button type="submit" class="logout-button">

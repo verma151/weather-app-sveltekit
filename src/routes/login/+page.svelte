@@ -4,14 +4,12 @@
 
 <div class="auth-container">
   <div class="auth-card">
-    <!-- Header -->
     <div class="auth-header">
       <div class="auth-icon">🌤️</div>
       <h2 class="auth-title">Welcome Back</h2>
       <p class="auth-subtitle">Sign in to your weather account</p>
     </div>
 
-    <!-- Form -->
     <form method="POST" class="auth-form">
       <div class="form-group">
         <label for="email" class="form-label">Email</label>
@@ -43,7 +41,6 @@
       </button>
     </form>
 
-    <!-- Error Message -->
     {#if form?.error}
       <div class="error-message">
         <span class="error-icon">⚠️</span>
@@ -51,7 +48,6 @@
       </div>
     {/if}
 
-    <!-- Sign up link -->
     <div class="auth-footer">
       <p class="footer-text">
         Don't have an account? 

@@ -19,7 +19,6 @@ export const actions: Actions = {
       return { error: "Invalid credentials" };
     }
 
-    // Create a JWT token containing the email
     const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: "1h" });
 
     cookies.set("token", token, {

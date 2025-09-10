@@ -4,7 +4,6 @@
 
 <div class="auth-container">
   <div class="auth-card">
-    <!-- Header -->
     <div class="auth-header">
       <div class="auth-icon">🌤️</div>
       <h2 class="auth-title">Create Account</h2>
@@ -12,7 +11,6 @@
     </div>
 
     {#if form?.success}
-      <!-- Success Message -->
       <div class="success-message" style="background: #ecfdf5; border: 1px solid #10b981; border-radius: 8px; padding: 16px; text-align:center; margin-bottom:16px;">
         <span style="font-size:1.5rem;">✅</span>
         <p style="margin:0; color:#065f46; font-weight:500;">
@@ -20,7 +18,6 @@
         </p>
       </div>
     {:else}
-      <!-- Form -->
       <form method="POST" class="auth-form">
         <div class="form-group">
           <label for="name" class="form-label">Full Name</label>
@@ -64,7 +61,6 @@
         </button>
       </form>
 
-      <!-- Error Message -->
       {#if form?.error}
         <div class="error-message">
           <span class="error-icon">⚠️</span>
@@ -73,7 +69,6 @@
       {/if}
     {/if}
 
-    <!-- Login link (always visible) -->
     <div class="auth-footer">
       <p class="footer-text">
         Already have an account? 
