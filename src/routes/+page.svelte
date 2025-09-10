@@ -9,7 +9,7 @@
 
   function weatherIcon(weather: string, hour: number) {
     if (weather.toLowerCase().includes("rain")) return "🌧️";
-    if (hour >= 18 || hour < 6) return "🌙"; 
+    if (hour >= 18 || hour < 6) return "🌙";
     return "☀️";
   }
 </script>
@@ -26,14 +26,14 @@
 
   <div class="weather-card">
     <div class="tab-container">
-      <button 
+      <button
         class="tab-button {activeTab === 'current' ? 'active' : ''}"
         on:click={() => (activeTab = "current")}
       >
         <span class="tab-icon">🌤️</span>
         Current Weather
       </button>
-      <button 
+      <button
         class="tab-button {activeTab === 'history' ? 'active' : ''}"
         on:click={() => (activeTab = "history")}
       >
@@ -50,10 +50,13 @@
               <div class="location">
                 <h2>{data.weather.city}, {data.weather.country}</h2>
               </div>
-              
+
               <div class="main-weather">
                 <div class="weather-icon">
-                  {weatherIcon(data.weather.weather, new Date(data.weather.time).getHours())}
+                  {weatherIcon(
+                    data.weather.weather,
+                    new Date(data.weather.time).getHours(),
+                  )}
                 </div>
                 <div class="temperature">
                   {data.weather.temp}°C
@@ -66,12 +69,16 @@
                   <span class="detail-value">{data.weather.weather}</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Sunrise</span>
-                  <span class="detail-value">{formatTime(data.weather.sunrise)}</span>
+                  <span class="detail-label">🌅 Sunrise</span>
+                  <span class="detail-value"
+                    >{formatTime(data.weather.sunrise)}</span
+                  >
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">Sunset</span>
-                  <span class="detail-value">{formatTime(data.weather.sunset)}</span>
+                  <span class="detail-label">🌇 Sunset</span>
+                  <span class="detail-value"
+                    >{formatTime(data.weather.sunset)}</span
+                  >
                 </div>
               </div>
             </div>
@@ -92,10 +99,15 @@
                 <div class="history-item">
                   <div class="history-main">
                     <div class="history-icon">
-                      {weatherIcon(item.weather, new Date(item.time).getHours())}
+                      {weatherIcon(
+                        item.weather,
+                        new Date(item.time).getHours(),
+                      )}
                     </div>
                     <div class="history-info">
-                      <div class="history-location">{item.city}, {item.country}</div>
+                      <div class="history-location">
+                        {item.city}, {item.country}
+                      </div>
                       <div class="history-temp">{item.temp}°C</div>
                       <div class="history-condition">{item.weather}</div>
                     </div>
@@ -132,7 +144,8 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
   }
 
   .header-card {
