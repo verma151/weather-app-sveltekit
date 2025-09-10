@@ -2,6 +2,12 @@
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
+
+## set up .env file for this project using this keys 
+WEATHER_API_KEY=b91872c774f877283dc9faf31eed2a15
+SECRET_KEY=9f3c4a2b6d7e8f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a
+
+
 ## Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!
