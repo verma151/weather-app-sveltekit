@@ -16,6 +16,23 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom', // <-- must be 'jsdom'
+      coverage: {
+      reporter: ['text', 'html'],
+      all: true, // include all files in coverage
+      include: [
+        'src/lib/component/**/*.{ts,svelte}',
+        'src/routes/**/*.{ts,svelte}'
+      ],
+      exclude: [
+        '**/node_modules/**',
+        '**/.svelte-kit/**',
+        '**/vitest.config.ts',
+        '**/vite.config.ts',
+        '**/svelte.config.js',
+        '**/*.d.ts',
+        '**/lib/server/**'
+      ]
+    },
     setupFiles: './tests/setup.ts', // optional but recommended
   },
 });
